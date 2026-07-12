@@ -1,0 +1,10 @@
+trial_id,target_image,distractor_image,cue
+1,target_01.png,distractor_01.png,cue_01.wav
+2,target_02.png,distractor_02.png,cue_02.wav
+3,target_03.png,distractor_03.png,cue_03.wav
+4,target_04.png,distractor_04.png,cue_04.wav
+5,target_05.png,distractor_05.png,cue_05.wav
+6,target_06.png,distractor_06.png,cue_06.wav
+7,target_07.png,distractor_07.png,cue_07.wav
+8,target_08.png,distractor_08.png,cue_08.wav
+

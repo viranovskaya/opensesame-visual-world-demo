@@ -1,0 +1,201 @@
+---
+API: 2.1
+OpenSesame: 3.3.9
+Platform: posix
+---
+set width 1024
+set height 768
+set uniform_coordinates yes
+set foreground white
+set background black
+set description "Sanitized auditory visual-world demonstration"
+set title "Visual World Demo"
+set subject_nr 0
+set response ""
+set response_time -1
+set response_timeout 0
+set correct_key ""
+set correct 0
+set total_correct 0
+set total_trials 0
+set accuracy_percent 0.0
+set summary_text "Accuracy will be shown here"
+set start experiment_sequence
+
+define sequence experiment_sequence
+	set flush_keyboard yes
+	set description "Main experiment sequence"
+	run initialize always
+	run instructions always
+	run trial_loop always
+	run calculate_summary always
+	run summary always
+
+define inline_script initialize
+	set description "Initialize aggregate variables"
+	___run__
+	var.total_correct = 0
+	var.total_trials = 0
+	var.accuracy_percent = 0.0
+	__end__
+	set _prepare ""
+
+define sketchpad instructions
+	set duration keypress
+	set description "Participant instructions"
+	draw textline center=1 color=white font_family=sans font_size=28 html=yes text="Choose the image that matches the sound." x=0 y=-120 z_index=0
+	draw textline center=1 color=white font_family=sans font_size=24 html=yes text="F = left     J = right" x=0 y=-30 z_index=0
+	draw textline center=1 color=white font_family=sans font_size=20 html=yes text="Respond within 2 seconds. Press any key to begin." x=0 y=70 z_index=0
+
+define loop trial_loop
+	set break_if_on_first yes
+	set repeat 1
+	set order random
+	set description "Eight randomized demo trials"
+	set cycles 8
+	set continuous no
+	set source_file ""
+	set source table
+	setcycle 0 trial_id "1"
+	setcycle 0 target_image "target_01.png"
+	setcycle 0 distractor_image "distractor_01.png"
+	setcycle 0 cue "cue_01.wav"
+	setcycle 0 target_position "centerleft"
+	setcycle 0 distractor_position "centerright"
+	setcycle 1 trial_id "2"
+	setcycle 1 target_image "target_02.png"
+	setcycle 1 distractor_image "distractor_02.png"
+	setcycle 1 cue "cue_02.wav"
+	setcycle 1 target_position "centerleft"
+	setcycle 1 distractor_position "centerright"
+	setcycle 2 trial_id "3"
+	setcycle 2 target_image "target_03.png"
+	setcycle 2 distractor_image "distractor_03.png"
+	setcycle 2 cue "cue_03.wav"
+	setcycle 2 target_position "centerleft"
+	setcycle 2 distractor_position "centerright"
+	setcycle 3 trial_id "4"
+	setcycle 3 target_image "target_04.png"
+	setcycle 3 distractor_image "distractor_04.png"
+	setcycle 3 cue "cue_04.wav"
+	setcycle 3 target_position "centerleft"
+	setcycle 3 distractor_position "centerright"
+	setcycle 4 trial_id "5"
+	setcycle 4 target_image "target_05.png"
+	setcycle 4 distractor_image "distractor_05.png"
+	setcycle 4 cue "cue_05.wav"
+	setcycle 4 target_position "centerleft"
+	setcycle 4 distractor_position "centerright"
+	setcycle 5 trial_id "6"
+	setcycle 5 target_image "target_06.png"
+	setcycle 5 distractor_image "distractor_06.png"
+	setcycle 5 cue "cue_06.wav"
+	setcycle 5 target_position "centerleft"
+	setcycle 5 distractor_position "centerright"
+	setcycle 6 trial_id "7"
+	setcycle 6 target_image "target_07.png"
+	setcycle 6 distractor_image "distractor_07.png"
+	setcycle 6 cue "cue_07.wav"
+	setcycle 6 target_position "centerleft"
+	setcycle 6 distractor_position "centerright"
+	setcycle 7 trial_id "8"
+	setcycle 7 target_image "target_08.png"
+	setcycle 7 distractor_image "distractor_08.png"
+	setcycle 7 cue "cue_08.wav"
+	setcycle 7 target_position "centerleft"
+	setcycle 7 distractor_position "centerright"
+	shuffle_horiz target_position distractor_position
+	run trial_sequence
+
+define sequence trial_sequence
+	set flush_keyboard yes
+	set description "Single trial"
+	run blank always
+	run fixation_onset always
+	run fixation_and_sound always
+	run post_sound_fixation always
+	run image_display always
+	run collect_response always
+	run timeout_feedback "[response_timeout] = 1"
+	run trial_logger always
+
+define sketchpad blank
+	set duration 1000
+	set description "Inter-trial blank"
+
+define sketchpad fixation_onset
+	set duration 0
+	set description "Display fixation before the cue"
+	draw fixdot color=white style=default x=0 y=0 z_index=0
+
+define sampler fixation_and_sound
+	set description "Auditory cue"
+	set duration sound
+	set fade_in 0
+	set pan 0
+	set pitch 1
+	set sample "[cue]"
+	set stop_after 1000
+	set volume 1
+
+define sketchpad post_sound_fixation
+	set duration 500
+	set description "Fixation interval"
+	draw fixdot color=white style=default x=0 y=0 z_index=0
+
+define sketchpad image_display
+	set duration 0
+	set description "Target and distractor display"
+	draw image center=1 file="[target_image]" scale=0.65 x="[=-256 if 'left' in var.target_position else 256]" y=0 z_index=0
+	draw image center=1 file="[distractor_image]" scale=0.65 x="[=-256 if 'left' in var.distractor_position else 256]" y=0 z_index=0
+
+define inline_script collect_response
+	set description "Timed response and professional scoring variables"
+	___run__
+	keyboard = Keyboard(keylist=[u'f', u'j'], timeout=2000)
+	start_time = clock.time()
+	response, end_time = keyboard.get_key()
+	var.response = response
+	var.response_time = end_time - start_time
+	var.response_timeout = int(response is None)
+	var.correct_key = 'f' if var.target_position == 'centerleft' else 'j'
+	var.correct = int(response == var.correct_key)
+	var.total_trials += 1
+	var.total_correct += var.correct
+	var.accuracy_percent = round(100.0 * var.total_correct / var.total_trials, 1)
+	__end__
+	set _prepare ""
+
+define sketchpad timeout_feedback
+	set duration 500
+	set description "Shown only after timeout"
+	draw textline center=1 color=white font_family=sans font_size=28 html=yes text="Please respond faster" x=0 y=0 z_index=0
+
+define logger trial_logger
+	set description "Trial-level output"
+	set auto_log no
+	log trial_id
+	log target_image
+	log distractor_image
+	log cue
+	log target_position
+	log response
+	log response_time
+	log response_timeout
+	log correct_key
+	log correct
+	log total_correct
+	log total_trials
+	log accuracy_percent
+
+define inline_script calculate_summary
+	set description "Ensure summary is available"
+	set _prepare ""
+	set _run "var.summary_text = 'Accuracy: {:.1f}% ({}/{})'.format(var.accuracy_percent, var.total_correct, var.total_trials)"
+
+define sketchpad summary
+	set duration keypress
+	set description "End screen"
+	draw textline center=1 color=white font_family=sans font_size=30 html=yes text="Demo complete" x=0 y=-60 z_index=0
+	draw textline center=1 color=white font_family=sans font_size=24 html=yes text="[summary_text]" x=0 y=10 z_index=0
+	draw textline center=1 color=white font_family=sans font_size=18 html=yes text="Press any key to exit" x=0 y=80 z_index=0
