@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this demonstration, please cite it as software."
-title: "Sanitized OpenSesame Visual-World Experiment"
+title: "OpenSesame Visual-World Experiment"
 type: software
 authors:
   - family-names: Agafonova
@@ -9,4 +9,3 @@ repository-code: "https://github.com/viranovskaya/opensesame-visual-world-demo"
 license: MIT
 version: 1.0.0
 date-released: 2026-07-12
-
