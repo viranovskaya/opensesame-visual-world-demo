@@ -1,8 +1,8 @@
 # Sanitized OpenSesame Visual-World Experiment
 
-A small, reproducible demonstration of an auditory two-alternative visual-world task. It preserves the programming concepts of an MSc experimental workflow—trial randomisation, auditory cues, timed keyboard responses, accuracy scoring, timeout handling, and trial-level logging—without releasing research data or third-party stimuli.
+[![CI](https://github.com/viranovskaya/opensesame-visual-world-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/viranovskaya/opensesame-visual-world-demo/actions/workflows/ci.yml)
 
-This repository is a portfolio and reproducibility artifact. It is **not** the original study, a validated diagnostic task, or a dataset.
+A small, reproducible demonstration of an auditory two-alternative visual-world task. It shows trial randomisation, auditory cues, timed keyboard responses, accuracy scoring, timeout handling, and trial-level logging without releasing research data or third-party stimuli.
 
 ## What the task does
 
@@ -13,6 +13,10 @@ On every trial, the participant hears a brief cue and sees a target image and a 
 - response window — 2 seconds
 
 The demo contains eight balanced, randomly ordered trials. Target position is randomised within each trial. The experiment records response, response time, timeout status, correct key, and accuracy.
+
+## My contribution
+
+I designed the experiment logic and rebuilt the task as a privacy-safe OpenSesame demo based on programming patterns from my MSc work. I wrote the deterministic asset and package builders, separated response scoring into testable Python functions, and validated the packaged experiment with automated responses.
 
 ## Repository contents
 
@@ -48,9 +52,11 @@ Both build scripts are deterministic. Rebuilding replaces only generated demo as
 
 The packaged experiment was parsed and run headlessly with OpenSesame 3.3.10 using automated responses and dummy audio/video drivers. All eight trials completed and produced eight trial-level log rows. Automated repository tests additionally cover scoring, package contents, and common privacy leaks.
 
-## Research provenance
+The test suite and deterministic rebuild check run automatically on every pull request.
 
-The implementation is a privacy-safe reconstruction of programming patterns used in the author's 2022 MSc project, *Chronotype and Time of Day Effects in Learning and Subjective Time Perception*. The scientific study and this software demonstration must be cited and evaluated separately.
+## Relationship to the MSc project
+
+This demo draws on programming patterns from my 2022 MSc project, *Chronotype and Time of Day Effects in Learning and Subjective Time Perception*. It is not the original experiment or a dataset; the scientific study and this software demo should be evaluated separately.
 
 See [Methods](docs/methods.md) and [Privacy and provenance](docs/privacy_and_provenance.md) for the exact boundaries of the public artifact.
 
