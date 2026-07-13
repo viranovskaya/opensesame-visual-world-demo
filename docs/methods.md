@@ -1,8 +1,8 @@
-# Demonstration method
+# Task method
 
 ## Purpose
 
-This task demonstrates the implementation of an auditory two-alternative forced-choice visual-world paradigm in OpenSesame. It is intentionally compact and uses synthetic stimuli so that the execution logic can be inspected without exposing research materials.
+This is an auditory two-alternative visual-world task implemented in OpenSesame. I kept it to eight trials and used generated stimuli so that the complete task can be run without the original research materials.
 
 ## Trial sequence
 
@@ -32,11 +32,10 @@ The OpenSesame logger records the standard runtime variables and the following t
 - cumulative number correct;
 - cumulative accuracy.
 
-## Deliberate differences from the research workflow
+## Differences from the MSc task
 
-The public demo uses eight generated trials rather than the full research stimulus set. It uses neutral geometric drawings and pure-tone cues, and the response keys were changed to a conventional left/right `F`/`J` mapping. These changes mean that behavioral results from this demo are not comparable with the original study.
+This version uses eight generated trials instead of the original stimulus set. It uses geometric drawings and pure-tone cues, and the response keys are `F` and `J`. Therefore behavioural results from this task cannot be compared with the MSc study.
 
 ## Validation scope
 
-Automated tests cover response mapping, scoring, accuracy calculation, package contents, and common privacy leaks. They do not replace timing validation on the intended computer, monitor, keyboard, headphones, or OpenSesame version.
-
+The automated tests check response mapping, scoring, accuracy, package contents, and accidental inclusion of private files. Timing still has to be checked on the computer, monitor, keyboard, headphones, and OpenSesame version used for an actual experiment.

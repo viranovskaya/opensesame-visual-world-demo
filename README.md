@@ -1,8 +1,8 @@
-# Sanitized OpenSesame Visual-World Experiment
+# OpenSesame visual-world experiment
 
 [![CI](https://github.com/viranovskaya/opensesame-visual-world-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/viranovskaya/opensesame-visual-world-demo/actions/workflows/ci.yml)
 
-A small, reproducible demonstration of an auditory two-alternative visual-world task. It shows trial randomisation, auditory cues, timed keyboard responses, accuracy scoring, timeout handling, and trial-level logging without releasing research data or third-party stimuli.
+This is a small auditory visual-world task that can be opened and run in OpenSesame. I rebuilt it from experimental-programming patterns I used during my MSc, using new geometric images and tone cues instead of the original research materials.
 
 ## What the task does
 
@@ -12,17 +12,17 @@ On every trial, the participant hears a brief cue and sees a target image and a 
 - `J` — right image
 - response window — 2 seconds
 
-The demo contains eight balanced, randomly ordered trials. Target position is randomised within each trial. The experiment records response, response time, timeout status, correct key, and accuracy.
+The task contains eight balanced trials in random order. The target side is also randomised. For every trial, the experiment records the response, response time, timeout, correct key, and accuracy.
 
 ## My contribution
 
-I designed the experiment logic and rebuilt the task as a privacy-safe OpenSesame demo based on programming patterns from my MSc work. I wrote the deterministic asset and package builders, separated response scoring into testable Python functions, and validated the packaged experiment with automated responses.
+I wrote the task logic, the scripts that create the stimuli and OpenSesame package, and the response-scoring functions. I also added automated responses so that I could check whether a complete run produces the expected eight log rows.
 
 ## Repository contents
 
 ```text
 assets/                 Generated geometric images and tone cues
-docs/                   Method and privacy/provenance notes
+docs/                   Method and notes on the source materials
 experiment/             Trial manifest and runnable OpenSesame package
 scripts/                Deterministic asset and experiment builders
 src/visual_world/       Testable response-scoring logic
@@ -46,20 +46,20 @@ python scripts/build_experiment.py
 pytest
 ```
 
-Both build scripts use fixed trial inputs. Rebuilding replaces only generated demo assets and experiment packages; PNG encoding can differ across operating systems while the task content remains the same.
+Both scripts use the same trial inputs. Rebuilding replaces the generated stimuli and experiment packages. PNG encoding can differ across operating systems, although the task content stays the same.
 
 ## Validation
 
-The packaged experiment was parsed and run headlessly with OpenSesame 3.3.10 using automated responses and dummy audio/video drivers. All eight trials completed and produced eight trial-level log rows. Automated repository tests additionally cover scoring, package contents, and common privacy leaks.
+I ran the packaged experiment with OpenSesame 3.3.10 using automated responses and dummy audio/video drivers. All eight trials completed and produced eight log rows. The tests also check response scoring, package contents, and accidental inclusion of private files.
 
-Every pull request rebuilds the demo and then checks its scoring logic, package structure, and privacy boundary.
+Every pull request rebuilds the task and runs the same checks.
 
 ## Relationship to the MSc project
 
-This demo draws on programming patterns from my 2022 MSc project, *Chronotype and Time of Day Effects in Learning and Subjective Time Perception*. It is not the original experiment or a dataset; the scientific study and this software demo should be evaluated separately.
+The code is related to my 2022 MSc project, *Chronotype and Time of Day Effects in Learning and Subjective Time Perception*, but this is not the original experiment and it contains no study data. The trial set, images, and sounds were made for this repository.
 
-See [Methods](docs/methods.md) and [Privacy and provenance](docs/privacy_and_provenance.md) for the exact boundaries of the public artifact.
+See [Methods](docs/methods.md) for the task sequence and [Source materials and privacy](docs/privacy_and_provenance.md) for what is and is not included.
 
 ## License
 
-Code and newly generated demo assets are released under the MIT License. No original participant records, consent forms, photographs, recordings, or third-party experimental stimuli are included.
+The code and generated demo stimuli are released under the MIT License.

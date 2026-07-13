@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "opensesame-visual-world-demo"
 version = "1.0.0"
-description = "A privacy-safe demonstration of an auditory two-alternative visual-world task."
+description = "A small auditory visual-world task built in OpenSesame."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -20,4 +20,3 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
-

@@ -1,4 +1,4 @@
-# Privacy and provenance
+# Source materials and privacy
 
 ## Included
 
@@ -20,7 +20,6 @@
 
 Experiment output files are ignored by default. Anyone adapting the task for research is responsible for ethics approval, informed consent, data minimisation, secure storage, retention rules, and a jurisdiction-appropriate privacy notice.
 
-## Scientific boundary
+## What this repository can show
 
-This repository demonstrates software engineering and experimental implementation. It does not make the original sample, statistical analyses, or conclusions reproducible on its own. A scientific reproduction would require an authorised, de-identified analysis dataset, a codebook, analysis code, and appropriate approval from the research team and data controller.
-
+This repository shows how the task runs. It cannot reproduce the sample, analysis, or conclusions of the MSc study. That would require an authorised de-identified dataset, a codebook, the analysis code, and approval from the people responsible for the original data.
