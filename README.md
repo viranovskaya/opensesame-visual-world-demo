@@ -46,13 +46,13 @@ python scripts/build_experiment.py
 pytest
 ```
 
-Both build scripts are deterministic. Rebuilding replaces only generated demo assets and experiment packages.
+Both build scripts use fixed trial inputs. Rebuilding replaces only generated demo assets and experiment packages; PNG encoding can differ across operating systems while the task content remains the same.
 
 ## Validation
 
 The packaged experiment was parsed and run headlessly with OpenSesame 3.3.10 using automated responses and dummy audio/video drivers. All eight trials completed and produced eight trial-level log rows. Automated repository tests additionally cover scoring, package contents, and common privacy leaks.
 
-The test suite and deterministic rebuild check run automatically on every pull request.
+Every pull request rebuilds the demo and then checks its scoring logic, package structure, and privacy boundary.
 
 ## Relationship to the MSc project
 
